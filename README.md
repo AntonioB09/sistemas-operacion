@@ -2,6 +2,11 @@
 
 ## En desarrollo: tarea 2
 
+### Problemas actuales
+* Problemas con el uso de varios hilos y sqlite. Se necesita un algoritmo más elaborado que permita realizar correctamente esta prueba.
+* Faltan las pruebas de MySQL.
+* La distribución de procesos es incorrecta (0 asignados) al usar 10 queries con 50 procesos.
+
 ### Requisitos
 #### Actividad 1
 * Elaborar un programa o script que llene una base de datos con 1.000.000 de entradas
@@ -25,4 +30,4 @@
   * SO?
   * BD?
 
-* Propopinga extensiones del estudio para averiguar otros aspectos de rendimiento
+* Proponga extensiones del estudio para averiguar otros aspectos de rendimiento
