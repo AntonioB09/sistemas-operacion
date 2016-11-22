@@ -17,10 +17,18 @@ class SQLiteTest:
         
     def close(self):
         self.connection.close()
+
+    def insert(self, min_limit, max_limit):
+        '''Insert a number of elements into the table table'''
+        for i in range(min_limit, max_limit):
+            cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
+                           (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO " + \
+                            str(i), i))
+        self.connection.commit()
         
 
 if __name__ == "__main__":
-    test = SQLiteTest('sqlite-test')
+    test = SQLiteTest('sqlite-test.db')
     cursor = test.cursor
     
     # Create test table
@@ -37,27 +45,43 @@ if __name__ == "__main__":
 
         # Fill table with 1000000 elements
         print("Filling...")
-        for i in range(0, 1000000):
-            test.cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
-                                (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO " + \
-                                 str(i), i))
-        test.commit()
+        test.insert(0, 1000000)
+
     except sqlite3.Error as e:
         pass
 
+    print("Success!\n\n")
+    
     try:
         # Escenario 1
+        print("Scenario 1:")
         elements = [10, 1000, 100000, 300000]
         process = [1, 10, 50]
-        j = 1000001 # Hardcoded, yes!
+        j = 1000000 # Hardcoded, yes!
         
-        for p in process:
+        for proc in process:
             for e in elements:
-                what = p/e
-                print('Now inserting %d new elements, using %d process. %d per process' % (e, p, what))
-                cursor.execute('')
+                start = time()
+                what = e/proc
+                
+                print('ins = %d \t procs = %d \t per = %d'
+                      % (e, proc, what))
+                
+                for i in range(0, proc):
+                    min_limit = int(j + what * i)
+                    max_limit = int(j + what * (i + 1))
+                    
+                    p = Process(target=test.insert,
+                                args=(min_limit, max_limit))
+                    p.start()
+                    p.join()
+                
+                end = time()
+                elapsed = end - start
+                j += e
+                print("Time elapsed: %.4f\n" % elapsed)
         
     except sqlite3.Error as e:
-        print("DB error: {}".format(e))
+        print("DB error: {} s".format(e))
                     
     test.close()
