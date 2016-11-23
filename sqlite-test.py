@@ -1,5 +1,6 @@
 from multiprocessing import Process
 from time import time
+from random import randint
 
 import threading
 import sqlite3
@@ -22,15 +23,19 @@ class SQLiteTest:
 
     def insert(self, min_limit, max_limit):
         '''Insert a number of elements into the table table'''
-        try:
-            self.lock.acquire(True)
-            for i in range(min_limit, max_limit):
-                cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
-                               (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO " + \
-                                str(i), i))
-            self.connection.commit()
-        finally:
-            self.lock.release()
+        for i in range(min_limit, max_limit):
+            cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
+                           (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO "+str(i), i))
+        self.connection.commit()
+            
+    def select_with_index(self, index):
+        '''Select a random record using indexes'''
+        cursor.execute('SELECT * FROM test WHERE id=?', (index,))
+
+    def select(self, pseudo_index):
+        '''Select a random record using an not indexed id'''
+        cursor.execute('SELECT * FROM test WHERE id2=?', (pseudo_index,))            
+        
 
 if __name__ == "__main__":
     test = SQLiteTest('sqlite-test.db')
@@ -65,8 +70,8 @@ if __name__ == "__main__":
         # Escenario 1
         print("\nScenario 1:")
         
-        for proc in process:
-            for e in elements:
+        for e in elements:
+            for proc in process:
                 start = time()
                 what = e/proc
                 
@@ -94,8 +99,8 @@ if __name__ == "__main__":
             print("\nScenario 2")
 
             threads = list()
-            for proc in process:
-                for e in elements:
+            for e in elements:
+                for proc in process:
                     start = time()
                     what = e/proc
                     
@@ -116,6 +121,50 @@ if __name__ == "__main__":
                         j += e
                         print(j)
                         print("Time elapsed: %.5f\n" % elapsed)
+        
+
+        # Escenario 3
+        print("\nScenario 3:")
+        
+        for e in elements:
+            for proc in process:
+                start = time()
+                what = e/proc
+                
+                print('ins = %d \t procs = %d \t per = %d'
+                      % (e, proc, what))
+                
+                for i in range(0, proc):
+                    p = Process(target=test.select_with_index,
+                                args=(randint(1, e),))
+                    p.start()
+                    p.join()
+                
+                end = time()
+                elapsed = end - start
+                print("Time elapsed: %.5f\n" % elapsed)
+
+        # Escenario 5
+        print("\nScenario 5:")
+        
+        for e in elements:
+            for proc in process:
+                start = time()
+                what = e/proc
+                
+                print('ins = %d \t procs = %d \t per = %d'
+                      % (e, proc, what))
+                
+                for i in range(0, proc):
+                    p = Process(target=test.select,
+                                args=(randint(1, e),))
+                    p.start()
+                    p.join()
+                
+                end = time()
+                elapsed = end - start
+                print("Time elapsed: %.5f\n" % elapsed)
+            
         
     except sqlite3.Error as e:
         print("DB error: {} s".format(e))
