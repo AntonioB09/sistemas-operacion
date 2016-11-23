@@ -1,0 +1,124 @@
+Scenario 1:
+ins = 10 	 procs = 1 	 per = 10
+1000010
+Time elapsed: 0.06178
+
+ins = 10 	 procs = 10 	 per = 1
+1000020
+Time elapsed: 0.23067
+
+ins = 10 	 procs = 50 	 per = 0
+1000030
+Time elapsed: 0.38499
+
+ins = 1000 	 procs = 1 	 per = 1000
+1001030
+Time elapsed: 0.02443
+
+ins = 1000 	 procs = 10 	 per = 100
+1002030
+Time elapsed: 0.31018
+
+ins = 1000 	 procs = 50 	 per = 20
+1003030
+Time elapsed: 1.47389
+
+ins = 100000 	 procs = 1 	 per = 100000
+1103030
+Time elapsed: 0.67207
+
+ins = 100000 	 procs = 10 	 per = 10000
+1203030
+Time elapsed: 1.02054
+
+ins = 100000 	 procs = 50 	 per = 2000
+1303030
+Time elapsed: 2.67676
+
+ins = 300000 	 procs = 1 	 per = 300000
+1603030
+Time elapsed: 2.06394
+
+ins = 300000 	 procs = 10 	 per = 30000
+1903030
+Time elapsed: 2.23296
+
+ins = 300000 	 procs = 50 	 per = 6000
+2203030
+Time elapsed: 3.43475
+
+
+Scenario 3:
+ins = 10 	 procs = 1 	 per = 10
+Time elapsed: 0.00496
+
+ins = 10 	 procs = 10 	 per = 1
+Time elapsed: 0.05931
+
+ins = 10 	 procs = 50 	 per = 0
+Time elapsed: 0.24655
+
+ins = 1000 	 procs = 1 	 per = 1000
+Time elapsed: 0.00467
+
+ins = 1000 	 procs = 10 	 per = 100
+Time elapsed: 0.05244
+
+ins = 1000 	 procs = 50 	 per = 20
+Time elapsed: 0.24230
+
+ins = 100000 	 procs = 1 	 per = 100000
+Time elapsed: 0.00457
+
+ins = 100000 	 procs = 10 	 per = 10000
+Time elapsed: 0.05527
+
+ins = 100000 	 procs = 50 	 per = 2000
+Time elapsed: 0.24284
+
+ins = 300000 	 procs = 1 	 per = 300000
+Time elapsed: 0.00479
+
+ins = 300000 	 procs = 10 	 per = 30000
+Time elapsed: 0.05153
+
+ins = 300000 	 procs = 50 	 per = 6000
+Time elapsed: 0.24108
+
+
+Scenario 5:
+ins = 10 	 procs = 1 	 per = 10
+Time elapsed: 0.00476
+
+ins = 10 	 procs = 10 	 per = 1
+Time elapsed: 0.05219
+
+ins = 10 	 procs = 50 	 per = 0
+Time elapsed: 0.23817
+
+ins = 1000 	 procs = 1 	 per = 1000
+Time elapsed: 0.00464
+
+ins = 1000 	 procs = 10 	 per = 100
+Time elapsed: 0.05190
+
+ins = 1000 	 procs = 50 	 per = 20
+Time elapsed: 0.24812
+
+ins = 100000 	 procs = 1 	 per = 100000
+Time elapsed: 0.00473
+
+ins = 100000 	 procs = 10 	 per = 10000
+Time elapsed: 0.09339
+
+ins = 100000 	 procs = 50 	 per = 2000
+Time elapsed: 0.54723
+
+ins = 300000 	 procs = 1 	 per = 300000
+Time elapsed: 0.00762
+
+ins = 300000 	 procs = 10 	 per = 30000
+Time elapsed: 0.24693
+
+ins = 300000 	 procs = 50 	 per = 6000
+Time elapsed: 0.98402
