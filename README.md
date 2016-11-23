@@ -2,9 +2,9 @@
 
 ## En desarrollo: tarea 2
 
-### Problemas actuales
+### Problemas 
 * Problemas con el uso de varios hilos y sqlite. Se necesita un algoritmo más elaborado que permita realizar correctamente esta prueba.
-* Faltan las pruebas de MySQL.
+* [**SOLUCIONADO**] Faltan las pruebas de MySQL.
 * La distribución de procesos es incorrecta (0 asignados) al usar 10 queries con 50 procesos.
 
 ### Requisitos
