@@ -1,3 +1,5 @@
 # Database files
 *.db
 
+# Pycache folder
+__pycache__/
