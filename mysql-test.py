@@ -50,7 +50,6 @@ if __name__ == "__main__":
                        'texto VARCHAR(255),'
                        'id2 INT)') # remember, 255 chars for MySQL
         print('CREATE TABLE')
-        exit()
 
         # Create index for the test table
         cursor.execute('CREATE INDEX id ON test (id)')
@@ -61,8 +60,7 @@ if __name__ == "__main__":
         test.insert(0, 1000000)
 
         print("xd")
-        exit()
-
+        
     except MySQLdb.Error as e:
         pass
 
@@ -100,7 +98,6 @@ if __name__ == "__main__":
                 print("Time elapsed: %.5f\n" % elapsed)
 
         # Escenario 2
-        # This ain't working. Fuck this
         # print("\nScenario 2")
         
         # threads = list()
@@ -126,8 +123,9 @@ if __name__ == "__main__":
         #             j += e
         #             print(j)
         #             print("Time elapsed: %.5f\n" % elapsed)
-
+        # test.close()
         # exit()
+
 
         # Escenario 3
         print("\nScenario 3:")

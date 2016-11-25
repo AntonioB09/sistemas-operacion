@@ -27,6 +27,7 @@ class SQLiteTest:
             cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
                            (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO "+str(i), i))
         self.connection.commit()
+
             
     def select_with_index(self, index):
         '''Select a random record using indexes'''
@@ -94,34 +95,34 @@ if __name__ == "__main__":
                 print("Time elapsed: %.5f\n" % elapsed)
 
         # Escenario 2
-        if sys.argv[1] != "s":
-            test.close()
-            print("\nScenario 2")
-
-            threads = list()
-            for e in elements:
-                for proc in process:
-                    start = time()
-                    what = e/proc
-                    
-                    print('ins = %d \t procs = %d \t per = %d'
-                          % (e, proc, what))
-                
-                    for i in range(0, proc):
-                        min_limit = int(j + what * i)
-                        max_limit = int(j + what * (i + 1))
-                    
-                        t = threading.Thread(target=connect,
-                                             args=(min_limit, max_limit))
-                        threads.append(t)
-                        t.start()
-                    
-                        end = time()
-                        elapsed = end - start
-                        j += e
-                        print(j)
-                        print("Time elapsed: %.5f\n" % elapsed)
+        # This ain't working. Fuck this
+        # print("\nScenario 2")
         
+        # threads = list()
+        # for e in elements:
+        #     for proc in process:
+        #         start = time()
+        #         what = e/proc
+                
+        #         print('ins = %d \t procs = %d \t per = %d'
+        #               % (e, proc, what))
+                
+        #         for i in range(0, proc):
+        #             min_limit = int(j + what * i)
+        #             max_limit = int(j + what * (i + 1))
+                    
+        #             t = threading.Thread(target=test.insert,
+        #                                  args=(min_limit, max_limit))
+        #             threads.append(t)
+        #             t.start()
+
+        #             end = time()
+        #             elapsed = end - start
+        #             j += e
+        #             print(j)
+        #             print("Time elapsed: %.5f\n" % elapsed)
+
+        # exit()
 
         # Escenario 3
         print("\nScenario 3:")
