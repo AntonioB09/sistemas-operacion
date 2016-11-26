@@ -1,0 +1,28 @@
+import threading
+import os
+import sys
+import urllib2
+
+class FetchUrls(threading.Thread):
+    """
+    Thread cheking URLs.
+    """
+    def __init__(self, urls, output):
+        """
+        Constructor
+        @param urls list of urls
+        @param output file to write urls output
+        """
+        threading.Thread.__init__(self)
+        self.urls = urls
+        self.output = output
+        
+    def run(self):
+        """
+        Thread run method. Check URLS one by one
+        """
+        while self.urls:
+            url = self.urls.pop()
+            req = urllib2.Request(url)
+            
+        
