@@ -1,17 +1,45 @@
-from sqlitetest import SQLiteTest
 from multiprocessing import Process
 from time import time
 from random import randint
 
 import threading
 import sqlite3
+# import MySQLdb
 import sys
 import os
 
+class SQLiteTest:
+
+    def __init__(self, database):
+        self.connection = sqlite3.connect(database)          
+        self.cursor = self.connection.cursor()
+        self.lock = threading.Lock()
+
+    def commit(self):
+        self.connection.commit()
+        
+    def close(self):
+        self.connection.close()
+
+    def insert(self, min_limit, max_limit):
+        '''Insert a number of elements into the table table'''
+        for i in range(min_limit, max_limit):
+            cursor.execute('INSERT INTO test VALUES(?, ?, ?)',
+                           (i, "ESTE ES EL TEXTO DE PRUEBA NUMERO "+str(i), i))
+        self.connection.commit()
+
+            
+    def select_with_index(self, index):
+        '''Select a random record using indexes'''
+        cursor.execute('SELECT * FROM test WHERE id=?', (index,))
+
+    def select(self, pseudo_index):
+        '''Select a random record using an not indexed id'''
+        cursor.execute('SELECT * FROM test WHERE id2=?', (pseudo_index,))            
+        
+
 if __name__ == "__main__":
-    MAX_ELEMS = 1000
-    lock = threading.Lock()
-    test = SQLiteTest('sqlite-test.db', lock)
+    test = SQLiteTest('sqlite-test.db')
     cursor = test.cursor
     
     # Create test table
@@ -28,7 +56,7 @@ if __name__ == "__main__":
 
         # Fill table with 1000000 elements
         print("Filling...")
-        test.insert(0, MAX_ELEMS)
+        test.insert(0, 1000000)
 
     except sqlite3.Error as e:
         pass
@@ -36,13 +64,12 @@ if __name__ == "__main__":
     print("Success!\n")
     
     try:
-        # elements = [10, 1000, 100000, 300000]
-        elements = [10, 100, 1000, 3000]
+        elements = [10, 1000, 100000, 300000]
         process = [1, 10, 50]
-        j = MAX_ELEMS # Hardcoded, yes!
+        j = 1000000 # Hardcoded, yes!
         
         # Escenario 1
-        print("\nSCENARIO 1:")
+        print("\nScenario 1:")
         
         for e in elements:
             for proc in process:
@@ -68,30 +95,34 @@ if __name__ == "__main__":
                 print("Time elapsed: %.5f\n" % elapsed)
 
         # Escenario 2
-
-        for e in elements:
-            for proc in process:
-                start = time()
-                what = e/proc
+        # This ain't working. Fuck this
+        # print("\nScenario 2")
+        
+        # threads = list()
+        # for e in elements:
+        #     for proc in process:
+        #         start = time()
+        #         what = e/proc
                 
-                print('ins = %d \t procs = %d \t per = %d'
-                      % (e, proc, what))
+        #         print('ins = %d \t procs = %d \t per = %d'
+        #               % (e, proc, what))
                 
-                for i in range(0, proc):
-                    min_limit = int(j + what * i)
-                    max_limit = int(j + what * (i + 1))
+        #         for i in range(0, proc):
+        #             min_limit = int(j + what * i)
+        #             max_limit = int(j + what * (i + 1))
                     
-                    t = SQLiteTest()
-                    t.start()
-                    t.join()
+        #             t = threading.Thread(target=test.insert,
+        #                                  args=(min_limit, max_limit))
+        #             threads.append(t)
+        #             t.start()
 
-                    end = time()
-                    elapsed = end - start
-                    j += e
-                    print(j)
-                    print("Time elapsed: %.5f\n" % elapsed)
+        #             end = time()
+        #             elapsed = end - start
+        #             j += e
+        #             print(j)
+        #             print("Time elapsed: %.5f\n" % elapsed)
 
-        exit()
+        # exit()
 
         # Escenario 3
         print("\nScenario 3:")

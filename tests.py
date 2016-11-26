@@ -1,4 +1,3 @@
-# Testing proc naming using strings and getattr()
 class Pair:
     def __init__(self, x, y):
         self.x = x
